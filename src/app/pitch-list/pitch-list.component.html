@@ -1,0 +1,21 @@
+<div class="container mt-3">
+  <div class="row justify-content-center">
+    <div class="col-10">
+      <h1 class="mt-3">Welcome to Pitchup
+      <button type="button" name="button" (click)="onResetAll()" class="btn btn-outline-secondary">Reset Votes</button></h1>
+      <ul class="list-group">
+        <app-pitch-single
+        [pitchId] = "pitch.id"
+        [lastUpdate]="lastUpdate"
+        [isAuth]="isAuth"
+        *ngFor="let pitch of pitches; let i = index"
+        [index]="i"
+        [pitchTitle]="pitch.title"
+        [pitchCategory]="pitch.category"
+        [pitchContent]="pitch.content"
+        [pitchScore]="pitch.score">
+        </app-pitch-single>
+      </ul>
+    </div>
+  </div>
+</div>

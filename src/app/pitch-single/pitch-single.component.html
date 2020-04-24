@@ -1,0 +1,41 @@
+
+
+
+
+<li [ngClass]="{ 'list-group-item mb-3':true, 'list-group-item-success': pitchScore > 4, 'list-group-item-danger': pitchScore < 0 }">
+
+
+  <div class="row">
+    <!-- <div *ngIf="condition; else elseBlock">Content to render when condition is true.</div>
+    <ng-template #elseBlock>Content to render when condition is false.</ng-template> -->
+    <div class="col-1">
+      <div *ngIf="pitchScore >= 5; else SadBlock">
+      <span>⭐</span>
+      </div>
+      <ng-template #SadBlock><span>😢</span></ng-template>
+    </div>
+    <div class="col-8">
+      <h2>{{ pitchTitle }}</h2>
+      <p>{{lastUpdate | async | date: "dd/MM/yyyy - HH'h'mm - z"}}</p>
+    </div>
+    <div class="col-3 text-lg-right">
+      <span class="badge badge-pill badge-success" [ngStyle]="{ 'background-color': getBgColor() }">{{pitchCategory}}</span>
+    </div>
+  </div>
+
+
+  <div class="form-group">
+    <input type="text" class="form-control" placeholder="Edit pitch title" [(ngModel)]="pitchTitle">
+  </div>
+
+  <p>{{pitchContent | slice: 0:30 }} (...)</p>
+  <a [routerLink]="[pitchId]">View details</a>
+  <footer class="mt-4">
+    <button type="button" class="btn btn-success mr-4" name="button" (click)="OnVoteUp()">Vote up 👍</button>
+    <button type="button" class="btn btn-danger mr-4" name="button" (click)="OnVoteDown()">Vote down 👎</button>
+    <button type="button" name="button" (click)="onResetOne()" class="btn btn-outline-secondary">Reset one</button>
+    <p [ngStyle]="{ 'color': getColor() }" class="float-right h4">👍 {{ pitchScore }} </p>
+    {{ getPitchTitle() }}
+  </footer>
+
+</li>
